@@ -1,6 +1,9 @@
 package kr.ac.jejunu;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 
@@ -9,70 +12,77 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.core.Is.is;
 
 public class UserDaoTests {
+    static UserDao userDao;
+
+    @BeforeAll
+    public static void setup() {
+        ApplicationContext applicationContext
+                = new AnnotationConfigApplicationContext(DaoFactory.class);
+        userDao = applicationContext.getBean("userDao", UserDao.class);
+    }
+
     @Test
-    public void Jejuget() throws SQLException, ClassNotFoundException {
+    public void get() throws SQLException, ClassNotFoundException {
         Integer id = 1;
-        String name = "smin";
-        String password = "5344";
-
-        Daofactory daofactory = new Daofactoy();
-        UserDao userDao = daofactory.getUserDao();
-
+        String name = "hulk";
+        String password = "1234";
+//        DaoFactory daoFactory = new DaoFactory();
+//        UserDao userDao = daoFactory.getUserDao();
         User user = userDao.findById(id);
         assertThat(user.getId(), is(id));
         assertThat(user.getName(), is(name));
         assertThat(user.getPassword(), is(password));
     }
+
     @Test
-    public void Jejuinsert() throws SQLException, ClassNotFoundException {
-        String name="smin";
-        String password="5344";
+    public void insert() throws SQLException, ClassNotFoundException {
+        String name = "허윤호";
+        String password = "1111";
 
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-
-        Daofactory daofactory = new Daofactoy();
-        UserDao userDao = daofactory.getUserDao();
+//        DaoFactory daoFactory = new DaoFactory();
+//        UserDao userDao = daoFactory.getUserDao();
         userDao.insert(user);
 
-        User insertedUser= userDao.findById(user.getId());
+        User insertedUser = userDao.findById(user.getId());
 
         assertThat(user.getId(), greaterThan(0));
         assertThat(insertedUser.getId(), is(user.getId()));
         assertThat(insertedUser.getName(), is(user.getName()));
         assertThat(insertedUser.getPassword(), is(user.getPassword()));
-
     }
-
-    @Test
-    public void Hallaget() throws SQLException, ClassNotFoundException {
-        Integer id = 1;
-        String name = "jmin";
-        String password = "5344";
-
-        UserDao userDao = new UserDao(new HallaConnectionMaker());
-        User user = userDao.findById(id);
-        assertThat(user.getId(), is(id));
-        assertThat(user.getName(), is(name));
-        assertThat(user.getPassword(), is(password));
-    }
-    @Test
-    public void Hallainsert() throws SQLException, ClassNotFoundException {
-        String name="jmin";
-        String password="5344";
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
-        UserDao userDao = new UserDao(new HallaConnectionMaker());
-        userDao.insert(user);
-
-        User insertedUser= userDao.findById(user.getId());
-
-        assertThat(user.getId(), greaterThan(0));
-        assertThat(insertedUser.getId(), is(user.getId()));
-        assertThat(insertedUser.getName(), is(user.getName()));
-        assertThat(insertedUser.getPassword(), is(user.getPassword()));
-
-    }
-}
+//
+//    @Test
+//    public void getHalla() throws SQLException, ClassNotFoundException {
+//        Integer id = 1;
+//        String name = "hulk";
+//        String password = "1234";
+//
+//        UserDao userDao = new UserDao(new HallaConnectionMaker());
+//        User user = userDao.findById(id);
+//        assertThat(user.getId(), is(id));
+//        assertThat(user.getName(), is(name));
+//        assertThat(user.getPassword(), is(password));
+//    }
+//
+//    @Test
+//    public void insertHalla() throws SQLException, ClassNotFoundException {
+//        String name = "허윤호";
+//        String password = "1111";
+//
+//        User user = new User();
+//        user.setName(name);
+//        user.setPassword(password);
+//        UserDao userDao = new UserDao(new HallaConnectionMaker());
+//        userDao.insert(user);
+//
+//        User insertedUser = userDao.findById(user.getId());
+//
+//        assertThat(user.getId(), greaterThan(0));
+//        assertThat(insertedUser.getId(), is(user.getId()));
+//        assertThat(insertedUser.getName(), is(user.getName()));
+//        assertThat(insertedUser.getPassword(), is(user.getPassword()));
+//    }
+//
