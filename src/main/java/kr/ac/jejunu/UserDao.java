@@ -1,20 +1,25 @@
 package kr.ac.jejunu;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
+@Component
 public class UserDao {
-    private final JdbcTemplate jdbcTemplate;
 
-    public UserDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+//    public UserDao(JdbcTemplate jdbcTemplate) {
+//        this.jdbcTemplate = jdbcTemplate;
+//    }
 
     public User findById(Integer id) throws SQLException {
-        //데이터 어딨어? => mysql
         String sql = "select * from  userinfo where id = ?";
         Object[] params = new Object[]{id};
         return jdbcTemplate.query(sql, rs -> {
@@ -29,8 +34,8 @@ public class UserDao {
         }, id);
     }
 
+
     public void insert(User user) throws SQLException {
-        //데이터 어딨어? => mysql
         String sql = "insert into userinfo (name, password) values ( ?, ? )";
         Object[] params = new Object[]{user.getName(), user.getPassword()};
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -45,10 +50,10 @@ public class UserDao {
             return preparedStatement;
         }, keyHolder);
         user.setId(keyHolder.getKey().intValue());
+
     }
 
     public void update(User user) throws SQLException {
-        //데이터 어딨어? => mysql
         String sql = "update userinfo set name = ?, password = ? where id = ?";
         Object[] params = new Object[]{user.getName(), user.getPassword(), user.getId()};
         jdbcTemplate.update(sql, params);
@@ -56,10 +61,11 @@ public class UserDao {
     }
 
     public void delete(Integer id) throws SQLException {
-        //데이터 어딨어? => mysql
         String sql = "delete from userinfo where id = ?";
         Object[] params = new Object[]{id};
         jdbcTemplate.update(sql, params);
 
     }
+
+
 }

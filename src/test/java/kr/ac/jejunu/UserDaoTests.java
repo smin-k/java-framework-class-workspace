@@ -2,7 +2,8 @@ package kr.ac.jejunu;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 
@@ -16,8 +17,8 @@ public class UserDaoTests {
 
     @BeforeAll
     public static void setup() throws ClassNotFoundException {
-        ClassPathXmlApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("daoFactory.xml");
+//        ClassPathXmlApplicationContext applicationContext =
+//                new ClassPathXmlApplicationContext("daoFactory.xml");
 //        StaticApplicationContext applicationContext =
 //                new StaticApplicationContext();
 //        BeanDefinition dataBeanDefinition = new RootBeanDefinition(SimpleDriverDataSource.class);
@@ -47,8 +48,8 @@ public class UserDaoTests {
 //                new RuntimeBeanReference("jdbcTemplate")
 //        );
 //        applicationContext.registerBeanDefinition("userDao", userDaoBeanDefinition);
-//        ApplicationContext applicationContext
-//                = new AnnotationConfigApplicationContext(DaoFactory.class);
+        ApplicationContext applicationContext
+                = new AnnotationConfigApplicationContext("kr.ac.jejunu");
         userDao = applicationContext.getBean("userDao", UserDao.class);
     }
 
@@ -67,7 +68,7 @@ public class UserDaoTests {
 
     @Test
     public void insert() throws SQLException, ClassNotFoundException {
-        String name = "허윤호";
+        String name = "hulk";
         String password = "1111";
 
         User user = new User();
@@ -85,7 +86,7 @@ public class UserDaoTests {
 
     @Test
     public void update() throws SQLException {
-        String name = "허윤호";
+        String name = "hulk";
         String password = "1111";
 
         User user = new User();
@@ -107,7 +108,7 @@ public class UserDaoTests {
 
     @Test
     public void delete() throws SQLException {
-        String name = "허윤호";
+        String name = "hulk";
         String password = "1111";
 
         User user = new User();
@@ -121,7 +122,7 @@ public class UserDaoTests {
 
         assertThat(deletedUser, nullValue());
     }
-
+}
 //
 //    @Test
 //    public void getHalla() throws SQLException, ClassNotFoundException {
@@ -138,7 +139,7 @@ public class UserDaoTests {
 //
 //    @Test
 //    public void insertHalla() throws SQLException, ClassNotFoundException {
-//        String name = "허윤호";
+//        String name ="hulk";
 //        String password = "1111";
 //
 //        User user = new User();
@@ -156,4 +157,4 @@ public class UserDaoTests {
 //    }
 //
 
-}
+
