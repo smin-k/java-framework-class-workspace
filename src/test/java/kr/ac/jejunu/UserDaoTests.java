@@ -13,7 +13,6 @@ import static org.hamcrest.core.Is.is;
 
 public class UserDaoTests {
     static UserDao userDao;
-
     @BeforeAll
     public static void setup() {
         ApplicationContext applicationContext
@@ -23,6 +22,7 @@ public class UserDaoTests {
 
     @Test
     public void Get() throws SQLException, ClassNotFoundException {
+
         Integer id = 1;
         String name = "hulk";
         String password = "1234";
