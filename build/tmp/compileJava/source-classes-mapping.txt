@@ -1,12 +1,6 @@
-kr/ac/jejunu/Jeju_Connection_Maker.java
- kr.ac.jejunu.Jeju_Connection_Maker
-kr/ac/jejunu/Halla_Connection_Maker.java
- kr.ac.jejunu.Halla_Connection_Maker
+kr/ac/jejunu/Daofactory.java
+ kr.ac.jejunu.Daofactory
 kr/ac/jejunu/User.java
  kr.ac.jejunu.User
 kr/ac/jejunu/UserDao.java
  kr.ac.jejunu.UserDao
-kr/ac/jejunu/Connection_Maker.java
- kr.ac.jejunu.Connection_Maker
-kr/ac/jejunu/Daofactory.java
- kr.ac.jejunu.Daofactory
