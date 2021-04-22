@@ -2,9 +2,15 @@ package kr.ac.jejunu;
 
 import java.sql.*;
 
-public abstract class UserDao {
+public class UserDao {
+    public final Connectionmaker connectionmaker;
+
+    public UserDao(Connectionmaker connectionmaker) {
+        this.connectionmaker = connectionmaker;
+    }
+
     public User get(Integer id) throws ClassNotFoundException, SQLException {
-        Connection connection = getConnection();
+        Connection connection = connectionmaker.getConnection();
         PreparedStatement preparedStatement =
                 connection.prepareStatement("select * from userinfo where id = ?");
         preparedStatement.setLong(1, id);
@@ -25,7 +31,7 @@ public abstract class UserDao {
     }
 
     public void insert(User user) throws SQLException, ClassNotFoundException {
-        Connection connection = getConnection();
+        Connection connection = connectionmaker.getConnection();
         PreparedStatement preparedStatement =
                 connection.prepareStatement("insert into userinfo (name, password) values (?,?)", Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, user.getName());
@@ -41,9 +47,4 @@ public abstract class UserDao {
         //리턴
     }
 
-  abstract Connection getConnection() throws ClassNotFoundException, SQLException;
-//        Class.forName("com.mysql.cj.jdbc.Driver");
-//        return DriverManager.getConnection("jdbc:mysql://localhost/jeju?serverTimezone=UTC"
-//                , "root", "5344");
-//    }
 }
