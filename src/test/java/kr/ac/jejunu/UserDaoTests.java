@@ -1,6 +1,7 @@
 package kr.ac.jejunu;
 
 
+import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -24,7 +25,7 @@ public class UserDaoTests {
     public void Get() throws SQLException, ClassNotFoundException {
 
         Integer id = 1;
-        String name = "hulk";
+        String name = "hulk1";
         String password = "1234";
 
         User user = userDao.get(id);
@@ -45,6 +46,45 @@ public class UserDaoTests {
         User Inserted_user = userDao.get(user.getId());
         assertThat(Inserted_user.getName(), is(name));
         assertThat(Inserted_user.getPassword(), is(password));
+    }
+
+    @Test
+    public void update() throws SQLException, ClassNotFoundException {
+        User user = new User();
+        String name = "hulk";
+        String password = "1234";
+        user.setName(name);
+        user.setPassword(password);
+        userDao.insert(user);
+
+        String updated_name= "hulk2";
+        String updated_password="1111";
+
+        user.setName(updated_name);
+        user.setPassword(updated_password);
+        userDao.update(user);
+
+        User updated_user = userDao.get(user.getId());
+
+        assertThat(updated_user.getName(), is(updated_name));
+        assertThat(updated_user.getPassword(), is(updated_password));
+
+
+    }
+
+    @Test
+    public void delete() throws SQLException, ClassNotFoundException {
+        User user = new User();
+        String name = "hulk";
+        String password = "1234";
+        user.setName(name);
+        user.setPassword(password);
+        userDao.insert(user);
+
+        userDao.delete(user.getId());
+        User deleted_user = userDao.get(user.getId());
+        assertThat(deleted_user, IsNull.nullValue());
+
     }
 
 }
