@@ -3,6 +3,7 @@ package kr.ac.jejunu;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
@@ -23,7 +24,8 @@ public class DaoFactory {
 
     @Bean
     public UserDao userDao() {
-        UserDao userDao = new UserDao(dataSource());
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
+        UserDao userDao = new UserDao(jdbcTemplate);
         return userDao;
 
     }

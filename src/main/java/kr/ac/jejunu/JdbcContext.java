@@ -81,7 +81,7 @@ public class JdbcContext {
         //리턴
     }
 
-    void jdbcContextForUpDel(Statement_strategy statement_strategy) throws SQLException {
+    void jdbcContextForUpdate(Statement_strategy statement_strategy) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -103,7 +103,7 @@ public class JdbcContext {
         }
     }
 
-    void insert(User user, Object[] params, String sql, UserDao userDao) throws SQLException {
+    void insert(User user, Object[] params, String sql) throws SQLException {
         Statement_strategy statement_strategy = connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             for(int i = 0; i< params.length; i ++){
@@ -114,7 +114,7 @@ public class JdbcContext {
         jdbcContextForInsert(user, statement_strategy);
     }
 
-    User get(Object[] params, String sql) throws SQLException {
+    User get(String sql, Object[] params) throws SQLException {
         Statement_strategy statement_strategy = connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             for(int i = 0; i< params.length; i ++){
@@ -126,7 +126,7 @@ public class JdbcContext {
         return jdbcContextForGet(statement_strategy);
     }
 
-    void update(Object[] params, String sql) throws SQLException {
+    void update(String sql,Object[] params) throws SQLException {
         Statement_strategy statement_strategy = connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             for (int i = 0; i < params.length; i ++) {
@@ -135,6 +135,6 @@ public class JdbcContext {
             return preparedStatement;
         };
 
-        jdbcContextForUpDel(statement_strategy);
+        jdbcContextForUpdate(statement_strategy);
     }
 }
