@@ -12,10 +12,11 @@ import static org.hamcrest.core.Is.is;
 public class UserDaoTests {
     @Test
     public void Get() throws SQLException, ClassNotFoundException {
+        Connection_Maker connection_maker = new Jeju_Connection_Maker();
         Integer id = 1;
         String name = "hulk";
         String password = "1234";
-        UserDao userDao = new Jeju_UserDao();
+        UserDao userDao = new UserDao(connection_maker);
         User user = userDao.get(id);
         assertThat(user.getId(), is(id));
         assertThat(user.getName(), is(name));
@@ -23,24 +24,25 @@ public class UserDaoTests {
     }
 
     @Test
-    public void Halla_Get() throws SQLException, ClassNotFoundException {
+    public void halla_Get() throws SQLException, ClassNotFoundException {
+        Connection_Maker connection_maker = new Halla_Connection_Maker();
         Integer id = 1;
         String name = "hulk";
         String password = "1234";
-        UserDao userDao = new Halla_UserDao();
+        UserDao userDao = new UserDao(connection_maker);
         User user = userDao.get(id);
         assertThat(user.getId(), is(id));
         assertThat(user.getName(), is(name));
         assertThat(user.getPassword(), is(password));
     }
-
 
     @Test
     public void insert() throws SQLException, ClassNotFoundException {
+        Connection_Maker connection_maker = new Halla_Connection_Maker();
         User user = new User();
         String name = "hulk";
         String password = "1234";
-        UserDao userDao = new Jeju_UserDao();
+        UserDao userDao = new UserDao(connection_maker);
 
         user.setName(name);
         user.setPassword(password);
@@ -51,19 +53,5 @@ public class UserDaoTests {
 
     }
 
-    @Test
-    public void Halla_insert() throws SQLException, ClassNotFoundException {
-        User user = new User();
-        String name = "hulk";
-        String password = "1234";
-        UserDao userDao = new Halla_UserDao();
 
-        user.setName(name);
-        user.setPassword(password);
-        userDao.insert(user);
-
-        User inserted_user = userDao.get(user.getId());
-        assertThat(inserted_user, IsNull.notNullValue());
-
-    }
 }
