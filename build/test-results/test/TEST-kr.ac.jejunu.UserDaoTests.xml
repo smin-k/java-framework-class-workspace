@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.ac.jejunu.UserDaoTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-04-23T01:51:05" hostname="DESKTOP-V5LSN68" time="0.386">
+  <properties/>
+  <testcase name="Insert()" classname="kr.ac.jejunu.UserDaoTests" time="0.365"/>
+  <testcase name="testGet()" classname="kr.ac.jejunu.UserDaoTests" time="0.019"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
