@@ -1,9 +1,13 @@
 package kr.ac.jejunu;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import javax.servlet.*;
 import java.io.IOException;
 
 public class UserServlet extends GenericServlet {
+    private UserDao userDao;
     @Override
     public void destroy() {
         System.out.println("*************** destroy *****************");
@@ -11,6 +15,9 @@ public class UserServlet extends GenericServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        ApplicationContext applicationContext =
+                new AnnotationConfigApplicationContext("kr.ac.jejunu");
+        this.userDao = applicationContext.getBean("userDao", UserDao.class);
         System.out.println("*************** init *****************");
     }
 //
@@ -20,11 +27,15 @@ public class UserServlet extends GenericServlet {
 //    }
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+        Integer id = Integer.parseInt(req.getParameter("id"));
+        User user = userDao.findById(id);
+        res.setContentType("text/html; charset=UTF-8");
         System.out.println("*************** service *****************");
         StringBuffer response = new StringBuffer();
         response.append("<html>");
         response.append("<body>");
-        response.append("<h1>hello</h1>");
+        response.append("<h1>" +
+                String.format("Hello %s !!!",user.getName())+"</h1>");
         response.append("</body>");
         response.append("</html>");
         res.getWriter().println((response.toString()));
