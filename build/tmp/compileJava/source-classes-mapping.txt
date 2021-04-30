@@ -25,3 +25,5 @@ kr/ac/jejunu/JdbcContext.java
  kr.ac.jejunu.JdbcContext
 kr/ac/jejunu/UserDao.java
  kr.ac.jejunu.UserDao
+kr/ac/jejunu/UserServlet.java
+ kr.ac.jejunu.UserServlet

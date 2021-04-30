@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.ac.jejunu.LombokTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2021-04-30T07:56:08" hostname="DESKTOP-V5LSN68" time="0.02">
+<testsuite name="kr.ac.jejunu.LombokTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2021-04-30T08:22:26" hostname="DESKTOP-V5LSN68" time="0.071">
   <properties/>
-  <testcase name="equeals()" classname="kr.ac.jejunu.LombokTests" time="0.02">
-    <failure message="java.lang.AssertionError: &#13;&#10;Expected: is &lt;kr.ac.jejunu.User@53d0a26f&gt;&#13;&#10;     but: was &lt;kr.ac.jejunu.User@4f9434f&gt;" type="java.lang.AssertionError">java.lang.AssertionError: 
-Expected: is &lt;kr.ac.jejunu.User@53d0a26f&gt;
-     but: was &lt;kr.ac.jejunu.User@4f9434f&gt;
+  <testcase name="equeals()" classname="kr.ac.jejunu.LombokTests" time="0.071">
+    <failure message="java.lang.AssertionError: &#13;&#10;Expected: is &lt;kr.ac.jejunu.User@57a4498e&gt;&#13;&#10;     but: was &lt;kr.ac.jejunu.User@1dd1ff90&gt;" type="java.lang.AssertionError">java.lang.AssertionError: 
+Expected: is &lt;kr.ac.jejunu.User@57a4498e&gt;
+     but: was &lt;kr.ac.jejunu.User@1dd1ff90&gt;
 	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
 	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
 	at kr.ac.jejunu.LombokTests.equeals(LombokTests.java:14)
@@ -98,7 +98,7 @@ Expected: is &lt;kr.ac.jejunu.User@53d0a26f&gt;
 	at java.base/java.lang.Thread.run(Thread.java:829)
 </failure>
   </testcase>
-  <system-out><![CDATA[kr.ac.jejunu.User@4f9434f
+  <system-out><![CDATA[kr.ac.jejunu.User@1dd1ff90
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
