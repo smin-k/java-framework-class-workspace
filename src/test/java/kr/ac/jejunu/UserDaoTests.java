@@ -55,9 +55,9 @@ public class UserDaoTests {
 
     @Test
     public void get() throws SQLException, ClassNotFoundException {
-        Integer id = 1;
+        Integer id = 2;
         String name = "hulk";
-        String password = "1234";
+        String password = "1111";
 //        DaoFactory daoFactory = new DaoFactory();
 //        UserDao userDao = daoFactory.getUserDao();
         User user = userDao.findById(id);
@@ -69,7 +69,7 @@ public class UserDaoTests {
     @Test
     public void insert() throws SQLException, ClassNotFoundException {
         String name = "hulk";
-        String password = "1111";
+        String password = "1234";
 
         User user = User.builder().name(name).password(password).build();
         userDao.insert(user);
